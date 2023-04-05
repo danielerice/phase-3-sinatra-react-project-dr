@@ -5,6 +5,7 @@ class CreateWines < ActiveRecord::Migration[6.1]
       t.integer :rating
       t.text :notes
       t.integer :user_id
+      t.timestamps
     end
   end
 end

@@ -33,14 +33,13 @@ class ApplicationController < Sinatra::Base
     wine.to_json
   end
 
-  #takes in attribute hash as params and posts to beers table, returns created beer obj
-  post "/beers" do
-    beer = Beer.create(
+  post "/foods" do
+    food = Food.create(
       name: params[:name],
-      rating: params[:rating],
-      notes: params[:notes],
-      user_id: params[:user_id]
+      wine_id: params[:wine_id]
     )
-    beer.to_json
+    food.to_json
   end
+
+
 end

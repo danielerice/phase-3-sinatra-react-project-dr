@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 
-function NewBeer () {
+function Food () {
   
   return (
-    <p></p>
+    <p>Food!</p>
   );
 }
 
-export default NewBeer;
+export default Food;

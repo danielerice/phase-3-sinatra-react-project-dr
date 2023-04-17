@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 
-function Home () {
+function Wine () {
   
   return (
-    <p>Home!</p>
+    <p>Wine!</p>
   );
 }
 
-export default Home;
+export default Wine;

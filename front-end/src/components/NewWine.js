@@ -3,8 +3,8 @@ import React, { useState } from "react";
 function NewWine () {
   
   return (
-    <p></p>
+    <p>New Wine</p>
   );
 }
 
-export default NewWine;
+export default NewWine

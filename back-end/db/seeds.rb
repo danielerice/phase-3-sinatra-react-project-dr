@@ -11,4 +11,8 @@ Wine.create(
     notes: "super great wow!",
     user_id: 1
 )
+Food.create(
+    name: "Big Steak",
+    wine_id: 1
+)
 puts "✅ Done seeding!"

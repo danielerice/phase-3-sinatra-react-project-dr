@@ -77,8 +77,13 @@ class ApplicationController < Sinatra::Base
     wines_by_high.to_json
   end
 
-  get "wines/:id/foods" do 
-    wine = Wine.find_by(id: params[:id])
-    
+  get "/wine/foods/:wine_id" do 
+    wine = Food.where(wine_id: params[:wine_id])
+    wine.to_json
+  end
+
+  get "/user/wines/:user_id" do
+    users_wine = Wine.where(user_id: params[:user_id])
+    users_wine.to_json
   end
 end

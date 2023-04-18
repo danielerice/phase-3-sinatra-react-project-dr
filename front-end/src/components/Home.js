@@ -1,9 +1,17 @@
 import React, { useState } from "react";
+import Wine from "./Wine";
 
-function Home () {
+function Home ({isLoggedin, setIsLoggedIn, user, setUser}) {
   
   return (
-    <p>Home!</p>
+    <div>
+      <button>New Wine!</button><button>New Food!</button>
+      <p>Home!</p>
+      <ul>
+        
+      </ul>
+    </div>
+
   );
 }
 

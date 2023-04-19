@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Wine from "./Wine";
 
-function Home ({isLoggedin, setIsLoggedIn, user, setUser}) {
+function Home ({isLoggedIn, setIsLoggedIn, user, setUser}) {
   
   const [wines, setWines] = useState([])
 
@@ -10,8 +10,8 @@ function Home ({isLoggedin, setIsLoggedIn, user, setUser}) {
       .then(response => response.json())
       .then(data => setWines(data))
         }, []);
-        console.log(wines)
   
+  if (isLoggedIn === true){
 return (
     <div>
       <button>New Wine!</button><button>New Food!</button>
@@ -29,7 +29,17 @@ return (
       </ul>
     </div>
 
-  );
+  )} else {
+    return (
+      <div>
+        <lable for="username" >Username:</lable><br />
+        <input id="username" type="text"></input><br />
+        <lable for="password" >Password:</lable><br />
+        <input id="password" type="text"></input><br /><br />
+        <input type="submit" value="Login"></input>
+    </div>
+    )
+  }
 }
 
 export default Home;

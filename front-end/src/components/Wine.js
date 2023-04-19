@@ -12,7 +12,6 @@ function Wine ({ wineID, nameOfWine, rating, notes, userID }) {
       .then(data => setFoods(data))
         }, []);
   
-        console.log(foods)
   
   return (
     <div id="container">

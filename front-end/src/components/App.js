@@ -5,7 +5,6 @@ import NewFood from './NewFood';
 import Food from './Food';
 import Wine from './Wine';
 import NewWine from './NewWine';
-import Login from './Login';
 import NewUser from './NewUser';
 import Home from './Home';
 
@@ -38,15 +37,6 @@ function App() {
 
         <Route path="newwine" element= {
           <NewWine 
-          isLoggedIn={isLoggedIn}
-          setIsLoggedIn={setIsLoggedIn}
-          user={user}
-          set={setUser}
-          />
-        }></Route>
-
-        <Route path="login" element= {
-          <Login 
           isLoggedIn={isLoggedIn}
           setIsLoggedIn={setIsLoggedIn}
           user={user}

@@ -6,7 +6,7 @@ function Home ({isLoggedIn, setIsLoggedIn, user, setUser}) {
   const [wines, setWines] = useState([])
 
   useEffect(() => {
-    fetch(`http://localhost:9292/user/wines/1`)
+    fetch(`http://localhost:9292/user/wines/${user.id}`)
       .then(response => response.json())
       .then(data => setWines(data))
         }, []);

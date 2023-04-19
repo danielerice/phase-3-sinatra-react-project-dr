@@ -7,10 +7,10 @@ function NewWine () {
         <form>
             <label for="wineName" >Wine Name:</label><br />
             <input id="wineName" type="text"></input><br />
-            <lable for="wineRating" >Rating</lable><br />
+            <lable for="wineRating" >Rating:</lable><br />
             <input id="wineRating" type="integer"></input><br />
-            <label for="wineNotes" >notes</label><br />
-            <input id="wineNotes" type="text"></input><br />
+            <label for="wineNotes" >Notes:</label><br />
+            <textarea id="wineNotes" rows="4" columns="100"></textarea><br />
             <input type="submit" value="Submit"></input>
         </form>
     </div>

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import '/Users/danielrice/Development/code/phase-3/phase-3-sinatra-react-project-dr/front-end/src/App.css';
 import { Route, Routes } from 'react-router-dom';
 import NewFood from './NewFood';
@@ -12,15 +12,11 @@ import Home from './Home';
 function App() {
   
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [user, setUser] = useState({
-    id: 1,
-    username: "Wine-0-1988",
-    password: "ILoveWine!",
-    name: "Gregathy",
-    created_at: "2023-04-05T20:40:01.297Z",
-    updated_at: "2023-04-05T20:40:01.297Z"
-  });
+  const [user, setUser] = useState();
   
+  
+
+  if (isLoggedIn === true) {
   return (
     <div className="App">
       <Routes>
@@ -29,7 +25,7 @@ function App() {
           isLoggedIn={isLoggedIn}
           setIsLoggedIn={setIsLoggedIn}
           user={user}
-          set={setUser}
+          setUser={setUser}
           />
         }></Route>
 
@@ -38,7 +34,7 @@ function App() {
           isLoggedIn={isLoggedIn}
           setIsLoggedIn={setIsLoggedIn}
           user={user}
-          set={setUser}
+          setUser={setUser}
           />
         }></Route>
 
@@ -47,7 +43,7 @@ function App() {
           isLoggedIn={isLoggedIn}
           setIsLoggedIn={setIsLoggedIn}
           user={user}
-          set={setUser}
+          setUser={setUser}
           />
         }></Route>
 
@@ -56,13 +52,26 @@ function App() {
           isLoggedIn={isLoggedIn}
           setIsLoggedIn={setIsLoggedIn}
           user={user}
-          set={setUser}
+          setUser={setUser}
           />
         }></Route>
         
       </Routes>
     </div>
-  );
+  );} else {
+    return (
+      <Routes>
+      <Route path="/" element= {
+          <Home 
+          isLoggedIn={isLoggedIn}
+          setIsLoggedIn={setIsLoggedIn}
+          user={user}
+          setUser={setUser}
+          />
+        }></Route>
+      </Routes>
+    )
+  }
 }
 
 export default App;

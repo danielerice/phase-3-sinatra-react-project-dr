@@ -12,6 +12,14 @@ class ApplicationController < Sinatra::Base
    user.to_json
   end
 
+  post "/foods" do 
+    food = Food.create(
+      name: params[:name],
+      wine_id: params[:wine_id]
+    )
+    food.to_json
+  end
+
   #takes in attribute hash as params and posts to users table, returns created users obj
   post "/users" do
     user = User.create(

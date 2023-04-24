@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Wine from "./Wine";
+import { Link } from "react-router-dom";
 
 function Home ({isLoggedIn, setIsLoggedIn, user, setUser}) {
   
@@ -18,7 +19,6 @@ function Home ({isLoggedIn, setIsLoggedIn, user, setUser}) {
           if(data){
               if (password === data.password) {
                 setUser(data)
-                console.log(data)
                 setIsLoggedIn(true)
               } else {
                 console.log("error message")
@@ -36,12 +36,12 @@ function Home ({isLoggedIn, setIsLoggedIn, user, setUser}) {
     } else {
       console.log("user not logged in")
     }
-  }, []);
+  },[user]);
 
   if (isLoggedIn === true){
     return (
         <div>
-          <button>New Wine!</button><button>New Food!</button>
+          <Link to='/newwine'>New Wine!</Link><Link to='/newfood'>New Food!</Link>
           <ul>
             {wines.map((wine) => {
               return (<Wine
@@ -58,13 +58,16 @@ function Home ({isLoggedIn, setIsLoggedIn, user, setUser}) {
 
   )} else {
     return (
+      <div>
       <form onSubmit={loginUser}>
         <lable for="username" >Username:</lable><br />
         <input id="username" type="text" onChange={(e) => setUsername(e.target.value)}></input><br />
         <lable for="password" >Password:</lable><br />
         <input id="password" type="text" onChange={(e) => setPassword(e.target.value)}></input><br />
         <input type="submit" value="Login"></input>
-    </form>
+      </form>
+      <Link to='/newuser'>Sign Up!</Link>
+      </div>
     )
   }
 }

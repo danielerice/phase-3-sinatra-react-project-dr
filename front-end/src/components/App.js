@@ -16,20 +16,11 @@ function App() {
   
   
 
-  if (isLoggedIn === true) {
+  
   return (
     <div className="App">
       <Routes>
-      <Route path="/" element= {
-          <Home 
-          isLoggedIn={isLoggedIn}
-          setIsLoggedIn={setIsLoggedIn}
-          user={user}
-          setUser={setUser}
-          />
-        }></Route>
-
-        <Route path="newfood" element= {
+        <Route path="/newfood" element= {
           <NewFood 
           isLoggedIn={isLoggedIn}
           setIsLoggedIn={setIsLoggedIn}
@@ -38,7 +29,7 @@ function App() {
           />
         }></Route>
 
-        <Route path="newwine" element= {
+        <Route path="/newwine" element= {
           <NewWine 
           isLoggedIn={isLoggedIn}
           setIsLoggedIn={setIsLoggedIn}
@@ -47,8 +38,17 @@ function App() {
           />
         }></Route>
 
-        <Route path="newuser" element= {
+        <Route path="/newuser" element= {
           <NewUser 
+          isLoggedIn={isLoggedIn}
+          setIsLoggedIn={setIsLoggedIn}
+          user={user}
+          setUser={setUser}
+          />
+        }></Route>
+
+        <Route exact path="/" element= {
+          <Home 
           isLoggedIn={isLoggedIn}
           setIsLoggedIn={setIsLoggedIn}
           user={user}
@@ -58,20 +58,7 @@ function App() {
         
       </Routes>
     </div>
-  );} else {
-    return (
-      <Routes>
-      <Route path="/" element= {
-          <Home 
-          isLoggedIn={isLoggedIn}
-          setIsLoggedIn={setIsLoggedIn}
-          user={user}
-          setUser={setUser}
-          />
-        }></Route>
-      </Routes>
-    )
-  }
+  )
 }
 
 export default App;

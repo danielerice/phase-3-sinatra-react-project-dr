@@ -6,41 +6,46 @@ function Home ({isLoggedIn, setIsLoggedIn, user, setUser}) {
   const [wines, setWines] = useState([]);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [userData, setUserData] = useState({});
 
   function loginUser(event) {
-    console.log('start of loginUser')
+    
     event.preventDefault();
-    console.log(username, password)
+    
       fetch(`http://localhost:9292/users/${username}`)
         .then(response => response.json())
         .then((data) => {
           if(data){
-            
               if (password === data.password) {
                 setUser(data)
                 console.log(data)
                 setIsLoggedIn(true)
-                .then(getUsersWine(data))
+                // getUsersWine(data)
               } else {
                 console.log("error message")
               }
             }
           })
-          console.log(userData)
-          
-        
-    console.log("end of loginUser")
   }
-
-  function getUsersWine(userData) {
-    fetch(`http://localhost:9292/user/wines/${userData.id}`)
+  useEffect(() => {
+    if(isLoggedIn === true) {
+    fetch(`http://localhost:9292/user/wines/${user.id}`)
       .then(response => response.json())
       .then(wineData => setWines(wineData))
       console.log("user is logged in, fetched wine")
-    } 
+    } else {
+      console.log("user not logged in")
+    }
+  }, []);
+  // function getUsersWine(data) {
+  //   console.log(data.id)
+  //   fetch(`http://localhost:9292/user/wines/${data.id}`)
+  //     .then(response => response.json())
+  //     .then(wineData => console.log(wineData))
+  //     console.log("user is logged in, fetched wine")
+  //   } 
   
-
+  console.log(user)
+  console.log(wines)
   if (isLoggedIn === true){
     return (
         <div>

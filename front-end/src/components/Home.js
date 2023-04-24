@@ -7,6 +7,7 @@ function Home ({isLoggedIn, setIsLoggedIn, user, setUser}) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
+  //fires on submit of controlled form, fetches user obj, sets user in state
   function loginUser(event) {
     
     event.preventDefault();
@@ -19,33 +20,24 @@ function Home ({isLoggedIn, setIsLoggedIn, user, setUser}) {
                 setUser(data)
                 console.log(data)
                 setIsLoggedIn(true)
-                // getUsersWine(data)
               } else {
                 console.log("error message")
               }
             }
           })
-  }
+        }
+  
+  //fetches a user's wine, if isLoggedIn is true
   useEffect(() => {
     if(isLoggedIn === true) {
     fetch(`http://localhost:9292/user/wines/${user.id}`)
       .then(response => response.json())
       .then(wineData => setWines(wineData))
-      console.log("user is logged in, fetched wine")
     } else {
       console.log("user not logged in")
     }
   }, []);
-  // function getUsersWine(data) {
-  //   console.log(data.id)
-  //   fetch(`http://localhost:9292/user/wines/${data.id}`)
-  //     .then(response => response.json())
-  //     .then(wineData => console.log(wineData))
-  //     console.log("user is logged in, fetched wine")
-  //   } 
-  
-  console.log(user)
-  console.log(wines)
+
   if (isLoggedIn === true){
     return (
         <div>

@@ -2,18 +2,16 @@ import React, { useState, useEffect } from "react";
 
 function NewFood ({ user, setUser}) {
   
-    const [wines, setWines] = useState([{}]);
-    const [wineName, setWineName] = useState();
-    const [wineRating, setWineRating] = useState();
+    const [wines, setWines] = useState([]);
+    const [foodName, setFoodName] = useState();
     const [pairing, setPairing] = useState();
     
     function postNewFood (event) {
         event.preventDefault();
         
         const formData = {
-            "wineName": {wineName},
-            "wineRating": {wineRating},
-            "pairing": {pairing}
+            "name": foodName,
+            "wine_id": pairing
         };
         const configObj = {
             method: "POST",
@@ -24,7 +22,7 @@ function NewFood ({ user, setUser}) {
             body: JSON.stringify(formData),
             };
 
-        fetch(`http://localhost:9292/wines`, configObj)
+        fetch(`http://localhost:9292/foods`, configObj)
             .then(response => response.json())
             .then(postedData => console.log(postedData))
 
@@ -40,15 +38,13 @@ function NewFood ({ user, setUser}) {
     <div>
         <form onSubmit={postNewFood}>
             <label for="wineName" >Food Name:</label><br />
-            <input id="wineName" type="text" onChange={(e) => setWineName(e.target.value)}></input><br />
-            <lable for="wineRating" >Rating:</lable><br />
-            <input id="wineRating" type="text" onChange={(e) => setWineRating(e.target.value)}></input><br />
+            <input id="foodName" type="text" onChange={(e) => setFoodName(e.target.value)}></input><br />
             <fieldset>
                 <legend>Pairs well with:</legend>
                     {wines.map((wine) => {
                         return (
                             <div>
-                                <input type="radio" id="wine.name" name="wine.name" value={wine.name} onChange={(e) => setPairing(e.target.value)}></input>
+                                <input type="radio" id={wine.id} name="wine.name" value={wine.name} onChange={(e) => setPairing(e.target.id)}></input>
                                 <label for="wine.name">{wine.name}</label>
                             </div>
                         )

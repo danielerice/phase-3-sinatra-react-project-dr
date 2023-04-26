@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import Food from "./Food";
+import { Link } from "react-router-dom";
 
 
-function Wine ({ wineID, nameOfWine, rating, notes, userID }) {
+function Wine ({ wineID, nameOfWine, rating, notes, userID, setNewData }) {
   
   const [foods, setFoods] = useState([]);
 
@@ -12,11 +13,26 @@ function Wine ({ wineID, nameOfWine, rating, notes, userID }) {
       .then(data => setFoods(data))
         }, []);
   
+  function deleteWine (event) {
+    console.log(wineID)
+
+    const configObj = {
+      method: 'DELETE',
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+    }}
+
+    fetch(`http://localhost:9292/wines/${wineID}`, configObj)
+      .then(response => response.json())
+      .then(data => setNewData(data))
+    
+  }
   
   return (
     <div id="container">
       <div className="card">
-        <h1>{nameOfWine}</h1><button>Edit</button><button> X</button>
+        <h1>{nameOfWine}</h1><button onClick={deleteWine}> X</button>
         <div className="card_details">
           <span className="tag">Rating: {rating}</span>
           <p>{notes}</p>

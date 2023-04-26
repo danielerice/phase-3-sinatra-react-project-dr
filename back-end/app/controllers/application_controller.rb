@@ -54,8 +54,7 @@ class ApplicationController < Sinatra::Base
     wine.update(
       name: params[:name],
       rating: params[:rating],
-      notes: params[:notes],
-      foods: params[:foods]
+      notes: params[:notes]
     )
     wine.to_json
   end

@@ -7,6 +7,8 @@ import Wine from './Wine';
 import NewWine from './NewWine';
 import NewUser from './NewUser';
 import Home from './Home';
+import EditWine from './EditWine';
+import Login from './Login';
 
 
 function App() {
@@ -16,49 +18,72 @@ function App() {
   
   
 
+  if (isLoggedIn) {
+    return (
+      <div className="App">
+        <Routes>
+          <Route path="/newfood" element= {
+            <NewFood 
+            isLoggedIn={isLoggedIn}
+            setIsLoggedIn={setIsLoggedIn}
+            user={user}
+            setUser={setUser}
+            />
+          }></Route>
   
-  return (
-    <div className="App">
+          <Route path="/newwine" element= {
+            <NewWine 
+            isLoggedIn={isLoggedIn}
+            setIsLoggedIn={setIsLoggedIn}
+            user={user}
+            setUser={setUser}
+            />
+          }></Route>
+  
+          <Route path="/newuser" element= {
+            <NewUser 
+            isLoggedIn={isLoggedIn}
+            setIsLoggedIn={setIsLoggedIn}
+            user={user}
+            setUser={setUser}
+            />
+          }></Route>
+  
+          <Route path="/editwine" element= {
+            <EditWine 
+            isLoggedIn={isLoggedIn}
+            setIsLoggedIn={setIsLoggedIn}
+            user={user}
+            setUser={setUser}
+            />
+          }></Route>
+  
+          <Route exact path="/" element= {
+            <Home 
+            isLoggedIn={isLoggedIn}
+            setIsLoggedIn={setIsLoggedIn}
+            user={user}
+            setUser={setUser}
+            />
+          }></Route>
+          
+        </Routes>
+      </div>
+    )
+  } else {
+    return (
       <Routes>
-        <Route path="/newfood" element= {
-          <NewFood 
+        <Route path='/' element={
+          <Login
           isLoggedIn={isLoggedIn}
           setIsLoggedIn={setIsLoggedIn}
-          user={user}
           setUser={setUser}
           />
-        }></Route>
-
-        <Route path="/newwine" element= {
-          <NewWine 
-          isLoggedIn={isLoggedIn}
-          setIsLoggedIn={setIsLoggedIn}
-          user={user}
-          setUser={setUser}
-          />
-        }></Route>
-
-        <Route path="/newuser" element= {
-          <NewUser 
-          isLoggedIn={isLoggedIn}
-          setIsLoggedIn={setIsLoggedIn}
-          user={user}
-          setUser={setUser}
-          />
-        }></Route>
-
-        <Route exact path="/" element= {
-          <Home 
-          isLoggedIn={isLoggedIn}
-          setIsLoggedIn={setIsLoggedIn}
-          user={user}
-          setUser={setUser}
-          />
-        }></Route>
-        
+          }></Route>
       </Routes>
-    </div>
-  )
+    )
+  }
+ 
 }
 
 export default App;

@@ -16,7 +16,7 @@ function Wine ({ wineID, nameOfWine, rating, notes, userID }) {
   return (
     <div id="container">
       <div className="card">
-        <h1>{nameOfWine}</h1>
+        <h1>{nameOfWine}</h1><button>Edit</button><button> X</button>
         <div className="card_details">
           <span className="tag">Rating: {rating}</span>
           <p>{notes}</p>

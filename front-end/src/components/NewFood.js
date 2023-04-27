@@ -35,23 +35,25 @@ function NewFood ({ user, setUser}) {
             }, []);
 
   return (
-    <div>
-        <form onSubmit={postNewFood}>
-            <label for="wineName" >Food Name:</label><br />
-            <input id="foodName" type="text" onChange={(e) => setFoodName(e.target.value)}></input><br />
-            <fieldset>
-                <legend>Pairs well with:</legend>
-                    {wines.map((wine) => {
-                        return (
-                            <div>
-                                <input type="radio" id={wine.id} name="wine.name" value={wine.name} onChange={(e) => setPairing(e.target.id)}></input>
-                                <label for="wine.name">{wine.name}</label>
-                            </div>
-                        )
-                    })}
-            </fieldset><br />
-            <input type="submit" value="Submit"></input>
-        </form>
+    <div id="container">
+        <div className="card">
+            <form onSubmit={postNewFood}>
+                <label for="wineName" >Food Name:</label><br />
+                <input id="foodName" type="text" onChange={(e) => setFoodName(e.target.value)}></input><br />
+                <fieldset>
+                    <legend>Pairs well with:</legend>
+                        {wines.map((wine) => {
+                            return (
+                                <div>
+                                    <input type="radio" id={wine.id} name="wine.name" value={wine.name} onChange={(e) => setPairing(e.target.id)}></input>
+                                    <label for="wine.name">{wine.name}</label>
+                                </div>
+                            )
+                        })}
+                </fieldset><br />
+                <input type="submit" value="Submit"></input>
+            </form>
+        </div>
     </div>
   );
 }

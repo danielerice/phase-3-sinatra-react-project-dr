@@ -29,16 +29,18 @@ function NewUser () {
   }
 
   return (
-    <div>
-      <form onSubmit={postNewUser}>
-        <label for="fullName" >Full Name:</label><br />
-        <input id="fullName" type="text" onChange={(e) => setFullName(e.target.value)}></input><br />
-        <lable for="username" >Username:</lable><br />
-        <input id="username" type="text" onChange={(e) => setUsername(e.target.value)}></input><br />
-        <lable for="password" >Password:</lable><br />
-        <input id="password" type="text" onChange={(e) => setPassword(e.target.value)}></input><br /><br />
-        <input type="submit" value="Submit"></input>
-        </form>
+    <div id="container">
+      <div className="card">
+        <form onSubmit={postNewUser}>
+          <label for="fullName" >Full Name:</label><br />
+          <input id="fullName" type="text" onChange={(e) => setFullName(e.target.value)}></input><br />
+          <lable for="username" >Username:</lable><br />
+          <input id="username" type="text" onChange={(e) => setUsername(e.target.value)}></input><br />
+          <lable for="password" >Password:</lable><br />
+          <input id="password" type="text" onChange={(e) => setPassword(e.target.value)}></input><br /><br />
+          <input type="submit" value="Submit"></input>
+          </form>
+      </div>
     </div>
   );
 }

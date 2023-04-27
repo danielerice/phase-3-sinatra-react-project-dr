@@ -32,11 +32,12 @@ function Wine ({ wineID, nameOfWine, rating, notes, userID, setNewData }) {
   return (
     <div id="container">
       <div className="card">
-        <h1>{nameOfWine}</h1><button onClick={deleteWine}> X</button>
+      <button onClick={deleteWine}> X</button>
+        <h1>{nameOfWine}</h1>
         <div className="card_details">
           <span className="tag">Rating: {rating}</span>
           <p>{notes}</p>
-          <p>This wine pairs great with:</p>  
+          <span className="tag">This wine pairs great with:</span>  
             <ul>
               {foods.map((food) => {
                 return (<Food

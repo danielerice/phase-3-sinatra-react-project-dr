@@ -40,27 +40,29 @@ console.log(user.id)
 
   if(wines) {
     return (
-        <div>
-          <form onSubmit={patchWine}>
-            <fieldset>
-                <legend>Select A Wine To Edit:</legend>
-                    {wines.map((wine) => {
-                        return (
-                            <div>
-                                <input type="radio" id={wine.id} name="wine.name" value={wine.name} onChange={(e) => setTarget(e.target.id)}></input>
-                                <label for="wine.name">{wine.name}</label>
-                            </div>
-                        )
-                    })}
-            </fieldset><br />
-            <label for="wineName" >Wine Name:</label><br />
-            <input id="wineName" type="text" onChange={(e) => setWineName(e.target.value)}></input><br />
-            <lable for="wineRating" >Rating:</lable><br />
-            <input id="wineRating" type="integer" onChange={(e) => setWineRating(e.target.value)}></input><br />
-            <label for="wineNotes" >Notes:</label><br />
-            <textarea id="wineNotes" rows="4" columns="100" onChange={(e) => setWineNotes(e.target.value)}></textarea><br />
-            <input type="submit" value="Submit"></input>
-            </form>
+        <div id="container">
+          <div className="card">
+            <form onSubmit={patchWine}>
+              <fieldset>
+                  <legend>Select A Wine To Edit:</legend>
+                      {wines.map((wine) => {
+                          return (
+                              <div>
+                                  <input type="radio" id={wine.id} name="wine.name" value={wine.name} onChange={(e) => setTarget(e.target.id)}></input>
+                                  <label for="wine.name">{wine.name}</label>
+                              </div>
+                          )
+                      })}
+              </fieldset><br />
+              <label for="wineName" >Wine Name:</label><br />
+              <input id="wineName" type="text" onChange={(e) => setWineName(e.target.value)}></input><br />
+              <lable for="wineRating" >Rating:</lable><br />
+              <input id="wineRating" type="integer" onChange={(e) => setWineRating(e.target.value)}></input><br />
+              <label for="wineNotes" >Notes:</label><br />
+              <textarea id="wineNotes" rows="4" columns="100" onChange={(e) => setWineNotes(e.target.value)}></textarea><br />
+              <input type="submit" value="Submit"></input>
+              </form>
+          </div>
         </div>
       );
   } else {

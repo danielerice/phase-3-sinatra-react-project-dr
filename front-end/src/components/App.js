@@ -40,15 +40,6 @@ function App() {
             />
           }></Route>
   
-          <Route path="/newuser" element= {
-            <NewUser 
-            isLoggedIn={isLoggedIn}
-            setIsLoggedIn={setIsLoggedIn}
-            user={user}
-            setUser={setUser}
-            />
-          }></Route>
-  
           <Route path="/editwine" element= {
             <EditWine 
             isLoggedIn={isLoggedIn}
@@ -79,6 +70,15 @@ function App() {
           setIsLoggedIn={setIsLoggedIn}
           setUser={setUser}
           />
+          }></Route>
+
+      <Route path="/newuser" element= {
+            <NewUser 
+            isLoggedIn={isLoggedIn}
+            setIsLoggedIn={setIsLoggedIn}
+            user={user}
+            setUser={setUser}
+            />
           }></Route>
       </Routes>
     )

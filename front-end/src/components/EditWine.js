@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from "react";
 
-function EditWine ({user}) {
+function EditWine ({user, wines, setWines}) {
   
   const [target, setTarget] = useState();
   const [wineName, setWineName] = useState();
   const [wineRating, setWineRating] = useState();
   const [wineNotes, setWineNotes] = useState();
-  const [wines, setWines] = useState();
 
-console.log(user.id)
-  function patchWine (event) {
+
+  async function patchWine (event) {
     event.preventDefault();
 
     const formData = {
@@ -26,19 +25,14 @@ console.log(user.id)
       body: JSON.stringify(formData),
       };
 
-      fetch(`http://localhost:9292/wines/${target}`, configObj)
-            .then(response => response.json())
-            .then(patchedData => console.log(patchedData))
+      const response = await fetch(`http://localhost:9292/wines/${target}`, configObj)
+      const patchedWine = await response.json()
+      const unchangedWines = (wines.filter((wine) => wine.id !== patchedWine.id))
+      const newWines = [...unchangedWines, patchedWine]
+      setWines(newWines)
   }
 
-  useEffect(() => {
-    console.log('in useEfect', user.id)
-    fetch(`http://localhost:9292/user/wines/${user.id}`)
-        .then(response => response.json())
-        .then(data => setWines(data))
-  },[]);
-
-  if(wines) {
+ 
     return (
         <div id="container">
           <div className="card">
@@ -65,13 +59,6 @@ console.log(user.id)
           </div>
         </div>
       );
-  } else {
-    return (
-        <div>
-            <p>Please hold your horses</p>
-        </div>
-    )
-  }
 }
 
 export default EditWine;

@@ -1,11 +1,6 @@
 class ApplicationController < Sinatra::Base
   set :default_content_type, 'application/json'
   
-  #test
-  get "/" do
-    { message: "testing, testing, 123" }.to_json
-  end
-
   #takes in the username from a controlled form and finds associated user if there is one, returns the user or nil if failed(for login)
   get "/users/:username" do
    user = User.find_by(username: params[:username])
@@ -38,7 +33,7 @@ class ApplicationController < Sinatra::Base
       notes: params[:notes],
       user_id: params[:user_id]
     )
-    wine.to_json
+    wine.to_json(include: :foods)
   end
 
   #takes the wine id and finds it, then destroys it. returns the wine obj that was deleted
@@ -56,7 +51,7 @@ class ApplicationController < Sinatra::Base
       rating: params[:rating],
       notes: params[:notes]
     )
-    wine.to_json
+    wine.to_json(include: :foods)
   end
 
   get "/wines/new" do
@@ -91,6 +86,6 @@ class ApplicationController < Sinatra::Base
 
   get "/user/wines/:user_id" do
     users_wine = Wine.where(user_id: params[:user_id])
-    users_wine.to_json
+    users_wine.to_json(include: :foods)
   end
 end

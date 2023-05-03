@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
 
-function NewFood ({ user, setUser}) {
+function NewFood ({ user, setUser, wines, setWines}) {
   
-    const [wines, setWines] = useState([]);
     const [foodName, setFoodName] = useState();
     const [pairing, setPairing] = useState();
     
-    function postNewFood (event) {
+    async function postNewFood (event) {
         event.preventDefault();
         
         const formData = {
@@ -21,18 +20,22 @@ function NewFood ({ user, setUser}) {
             },
             body: JSON.stringify(formData),
             };
+        console.log("pairing:", pairing)
+        const response = await fetch(`http://localhost:9292/foods`, configObj)
+        const postedFood = await response.json()
+        const targetWine = (wines.find((wine) => wine.id == pairing))
+        console.log("targetWine:", targetWine)
+        targetWine.foods.push(postedFood)
+        console.log("targetWine.foods:", targetWine.foods)
+        const unchangedWines = wines.filter((wine) => targetWine.id !== wine.id)
+        console.log("unchangedWines:", unchangedWines)
+        const stateWines = [...unchangedWines, targetWine]
+        console.log("stateWines:", stateWines)
 
-        fetch(`http://localhost:9292/foods`, configObj)
-            .then(response => response.json())
-            .then(postedData => console.log(postedData))
+        await setWines(stateWines)
 
     }
     
-    useEffect(() => {
-        fetch(`http://localhost:9292/user/wines/${user.id}`)
-          .then(response => response.json())
-          .then(data => setWines(data))
-            }, []);
 
   return (
     <div id="container">

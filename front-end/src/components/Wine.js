@@ -3,18 +3,10 @@ import Food from "./Food";
 import { Link } from "react-router-dom";
 
 
-function Wine ({ wineID, nameOfWine, rating, notes, userID, setNewData }) {
+function Wine ({ wineID, nameOfWine, rating, notes, userID, wines, setWines, wine }) {
   
-  const [foods, setFoods] = useState([]);
 
-  useEffect(() => {
-    fetch(`http://localhost:9292/wine/foods/${wineID}`)
-      .then(response => response.json())
-      .then(data => setFoods(data))
-        }, []);
-  
-  function deleteWine (event) {
-    console.log(wineID)
+  async function deleteWine (event) {
 
     const configObj = {
       method: 'DELETE',
@@ -23,10 +15,10 @@ function Wine ({ wineID, nameOfWine, rating, notes, userID, setNewData }) {
         "Accept": "application/json",
     }}
 
-    fetch(`http://localhost:9292/wines/${wineID}`, configObj)
-      .then(response => response.json())
-      .then(data => setNewData(data))
-    
+    const response = await fetch(`http://localhost:9292/wines/${wineID}`, configObj)
+    const deletedWine = await response.json()
+    const updatedWines = await wines.filter((wine) => deletedWine.id !== wine.id)
+    setWines(updatedWines)
   }
   
   return (
@@ -39,7 +31,7 @@ function Wine ({ wineID, nameOfWine, rating, notes, userID, setNewData }) {
           <p>{notes}</p>
           <span className="tag">This wine pairs great with:</span>  
             <ul>
-              {foods.map((food) => {
+              {wine.foods.map((food) => {
                 return (<Food
                   key={food.id}
                   name={food.name}

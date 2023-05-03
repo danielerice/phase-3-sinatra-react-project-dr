@@ -12,10 +12,27 @@ import Login from './Login';
 
 
 function App() {
-  
+  console.log("app has rendered")
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [user, setUser] = useState();
-  
+  const [user, setUser] = useState({});
+  const [wines, setWines] = useState([]);
+
+  //fetch that gets wines with nested foods array for each wine.
+  //pass each comp the wines array with nested foods.
+  //each comp is then resposible for updating state that it effects, newwines, adds awine. new food adds a foods to the correct wine, home deletes wine and removes wine from state. Edit wine also changes the wine in state.
+
+  //fetches a user's wine, if isLoggedIn is true
+  useEffect(() => {
+    console.log("firing")
+    if(isLoggedIn === true) {
+    fetch(`http://localhost:9292/user/wines/${user.id}`)
+      .then(response => response.json())
+      .then(wineData => setWines(wineData))
+      console.log(wines)
+    } else {
+      console.log("user not logged in")
+    }
+  }, [isLoggedIn]);
   
 
   if (isLoggedIn) {
@@ -24,6 +41,8 @@ function App() {
         <Routes>
           <Route path="/newfood" element= {
             <NewFood 
+            wines={wines}
+            setWines={setWines}
             isLoggedIn={isLoggedIn}
             setIsLoggedIn={setIsLoggedIn}
             user={user}
@@ -33,6 +52,8 @@ function App() {
   
           <Route path="/newwine" element= {
             <NewWine 
+            wines={wines}
+            setWines={setWines}
             isLoggedIn={isLoggedIn}
             setIsLoggedIn={setIsLoggedIn}
             user={user}
@@ -42,6 +63,8 @@ function App() {
   
           <Route path="/editwine" element= {
             <EditWine 
+            wines={wines}
+            setWines={setWines}
             isLoggedIn={isLoggedIn}
             setIsLoggedIn={setIsLoggedIn}
             user={user}
@@ -51,6 +74,8 @@ function App() {
   
           <Route exact path="/" element= {
             <Home 
+            wines={wines}
+            setWines={setWines}
             isLoggedIn={isLoggedIn}
             setIsLoggedIn={setIsLoggedIn}
             user={user}

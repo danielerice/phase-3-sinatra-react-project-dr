@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function NewUser () {
+function NewUser ({setUser, setIsLoggedIn}) {
   
   const [fullName, setFullName] = useState();
   const [username, setUsername] = useState();
@@ -25,7 +25,8 @@ function NewUser () {
 
       fetch(`http://localhost:9292/users`, configObj)
             .then(response => response.json())
-            .then(postedData => console.log(postedData))
+            .then(data => setUser(data))
+
   }
 
   return (

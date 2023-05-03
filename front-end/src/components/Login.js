@@ -2,7 +2,7 @@ import React, { useEffect, useState} from 'react';
 import { Link } from "react-router-dom";
 
 function Login ({ setIsLoggedIn, isLoggedIn, setUser}) {
-
+    console.log("login has rendered")
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
 

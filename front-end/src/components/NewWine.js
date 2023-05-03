@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 
-function NewWine ({ user, setUser }) {
+function NewWine ({ user, setUser, wines, setWines }) {
   
   const [wineName, setWineName] = useState();
   const [wineRating, setWineRating] = useState();
   const [wineNotes, setWineNotes] = useState();
 
-  function postNewWine (event) {
+  async function postNewWine (event) {
     event.preventDefault();
 
     const formData = {
@@ -24,9 +24,10 @@ function NewWine ({ user, setUser }) {
       body: JSON.stringify(formData),
       };
 
-      fetch(`http://localhost:9292/wines`, configObj)
-            .then(response => response.json())
-            .then(postedData => console.log(postedData))
+      const response = await fetch(`http://localhost:9292/wines`, configObj)
+      const postedWine = await response.json()
+      const newWines = [...wines, postedWine]
+      setWines(newWines)
   }
 
 

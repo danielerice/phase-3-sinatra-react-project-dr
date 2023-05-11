@@ -1,52 +1,37 @@
 import { useEffect, useState } from 'react';
 import '/Users/danielrice/Development/code/phase-3/phase-3-sinatra-react-project-dr/front-end/src/App.css';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, Link, NavLink } from 'react-router-dom';
 import NewFood from './NewFood';
-import Food from './Food';
-import Wine from './Wine';
 import NewWine from './NewWine';
-import NewUser from './NewUser';
 import Home from './Home';
 import EditWine from './EditWine';
-import Login from './Login';
+
 
 
 function App() {
   console.log("app has rendered")
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [user, setUser] = useState({});
+  
   const [wines, setWines] = useState([]);
 
-  //fetch that gets wines with nested foods array for each wine.
-  //pass each comp the wines array with nested foods.
-  //each comp is then resposible for updating state that it effects, newwines, adds awine. new food adds a foods to the correct wine, home deletes wine and removes wine from state. Edit wine also changes the wine in state.
 
-  //fetches a user's wine, if isLoggedIn is true
+  //fetches wines
   useEffect(() => {
-    console.log("firing")
-    if(isLoggedIn === true) {
-    fetch(`http://localhost:9292/user/wines/${user.id}`)
+    fetch(`http://localhost:9292/wines`)
       .then(response => response.json())
       .then(wineData => setWines(wineData))
-      console.log(wines)
-    } else {
-      console.log("user not logged in")
-    }
-  }, [isLoggedIn]);
+  }, [])
   
 
-  if (isLoggedIn) {
-    return (
+  return (
       <div className="App">
+        
+        <NavLink to='/'>Home!</NavLink><NavLink to='/newwine'>New Wine!</NavLink><NavLink to='/newfood'>New Food!</NavLink><NavLink to='/editWine'>Edit!</NavLink>
+        
         <Routes>
           <Route path="/newfood" element= {
             <NewFood 
             wines={wines}
             setWines={setWines}
-            isLoggedIn={isLoggedIn}
-            setIsLoggedIn={setIsLoggedIn}
-            user={user}
-            setUser={setUser}
             />
           }></Route>
   
@@ -54,10 +39,6 @@ function App() {
             <NewWine 
             wines={wines}
             setWines={setWines}
-            isLoggedIn={isLoggedIn}
-            setIsLoggedIn={setIsLoggedIn}
-            user={user}
-            setUser={setUser}
             />
           }></Route>
   
@@ -65,10 +46,6 @@ function App() {
             <EditWine 
             wines={wines}
             setWines={setWines}
-            isLoggedIn={isLoggedIn}
-            setIsLoggedIn={setIsLoggedIn}
-            user={user}
-            setUser={setUser}
             />
           }></Route>
   
@@ -76,39 +53,13 @@ function App() {
             <Home 
             wines={wines}
             setWines={setWines}
-            isLoggedIn={isLoggedIn}
-            setIsLoggedIn={setIsLoggedIn}
-            user={user}
-            setUser={setUser}
             />
           }></Route>
           
         </Routes>
       </div>
     )
-  } else {
-    return (
-      <Routes>
-        <Route path='/' element={
-          <Login
-          isLoggedIn={isLoggedIn}
-          setIsLoggedIn={setIsLoggedIn}
-          setUser={setUser}
-          />
-          }></Route>
-
-      <Route path="/newuser" element= {
-            <NewUser 
-            isLoggedIn={isLoggedIn}
-            setIsLoggedIn={setIsLoggedIn}
-            user={user}
-            setUser={setUser}
-            />
-          }></Route>
-      </Routes>
-    )
+  
   }
- 
-}
 
 export default App;

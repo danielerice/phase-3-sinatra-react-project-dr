@@ -1,16 +1,13 @@
 import React, { useEffect, useState } from "react";
 import Wine from "./Wine";
-import { Link } from "react-router-dom";
 
-function Home ({ wines, setWines, user, isLoggedIn }) {
 
-  console.log("home has fired")
+function Home ({ wines, setWines }) {
+
+  console.log("home has fired", wines)
 
   function renderWines() {
-      console.log("wines:", wines, "user:", user, "isLoggedIn:", isLoggedIn)
-      
- 
-
+      console.log("wines:", wines)
       wines.map((wine) => {
         return (<Wine
           key={wine.id}
@@ -28,7 +25,7 @@ function Home ({ wines, setWines, user, isLoggedIn }) {
   
   return (
         <div>
-          <Link to='/newwine'>New Wine!</Link><Link to='/newfood'>New Food!</Link><Link to='/editWine'>Edit!</Link>
+          
           <ul>
               {wines.map((wine) => {
                 return (<Wine
@@ -40,7 +37,6 @@ function Home ({ wines, setWines, user, isLoggedIn }) {
                   nameOfWine={wine.name}
                   rating={wine.rating}
                   notes={wine.notes}
-                  userID={wine.user_id}
                   />)
                 }
               )}

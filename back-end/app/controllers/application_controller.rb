@@ -14,8 +14,7 @@ class ApplicationController < Sinatra::Base
     wine = Wine.create(
       name: params[:name],
       rating: params[:rating],
-      notes: params[:notes],
-      user_id: params[:user_id]
+      notes: params[:notes]
     )
     wine.to_json(include: :foods)
   end
@@ -23,7 +22,8 @@ class ApplicationController < Sinatra::Base
   #takes the wine id and finds it, then destroys it. returns the wine obj that was deleted
   delete "/wines/:id" do
     wine = Wine.find_by(id: params[:id])
-    wine.destroy
+    Wine.destroy(params[:id])
+    wine.to_json
   end
 
   #takes an id and finds corresponding wine obj, then upadtes it in the table using passed attribute hash. can only change, name rating and notes
@@ -37,9 +37,8 @@ class ApplicationController < Sinatra::Base
     wine.to_json(include: :foods)
   end
 
-# /users/:user_id/wines
   get "/wines" do
-    wines = Wines.all
+    wines = Wine.all
     wines.to_json(include: :foods)
   end
 end

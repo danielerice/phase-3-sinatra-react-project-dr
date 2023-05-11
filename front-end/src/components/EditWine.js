@@ -1,12 +1,22 @@
 import React, { useState, useEffect } from "react";
 
-function EditWine ({user, wines, setWines}) {
+function EditWine ({ wines, setWines}) {
   
   const [target, setTarget] = useState();
   const [wineName, setWineName] = useState();
   const [wineRating, setWineRating] = useState();
   const [wineNotes, setWineNotes] = useState();
-
+  
+  function setTargetWine (targetId) {
+    
+    const targetWine = wines.find(wine => wine.id == targetId)
+    
+    setWineName(targetWine.name);
+    setWineNotes(targetWine.notes);
+    setWineRating(targetWine.rating);
+    setTarget(targetId);
+  
+  }
 
   async function patchWine (event) {
     event.preventDefault();
@@ -42,18 +52,18 @@ function EditWine ({user, wines, setWines}) {
                       {wines.map((wine) => {
                           return (
                               <div>
-                                  <input type="radio" id={wine.id} name="wine.name" value={wine.name} onChange={(e) => setTarget(e.target.id)}></input>
+                                  <input type="radio" id={wine.id} name="wine.name" value={wine.name} onChange={(e) => setTargetWine(e.target.id)}></input>
                                   <label for="wine.name">{wine.name}</label>
                               </div>
                           )
                       })}
               </fieldset><br />
               <label for="wineName" >Wine Name:</label><br />
-              <input id="wineName" type="text" onChange={(e) => setWineName(e.target.value)}></input><br />
+              <input id="wineName" type="text" onChange={(e) => setWineName(e.target.value)} value={wineName}></input><br />
               <lable for="wineRating" >Rating:</lable><br />
-              <input id="wineRating" type="integer" onChange={(e) => setWineRating(e.target.value)}></input><br />
+              <input id="wineRating" type="integer" onChange={(e) => setWineRating(e.target.value)} value={wineRating}></input><br />
               <label for="wineNotes" >Notes:</label><br />
-              <textarea id="wineNotes" rows="4" columns="100" onChange={(e) => setWineNotes(e.target.value)}></textarea><br />
+              <textarea id="wineNotes" rows="4" columns="100" onChange={(e) => setWineNotes(e.target.value)} value={wineNotes}></textarea><br />
               <input type="submit" value="Submit"></input>
               </form>
           </div>

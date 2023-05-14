@@ -24,8 +24,8 @@ function NewWine ({ wines, setWines }) {
       };
 
       const response = await fetch(`http://localhost:9292/wines`, configObj)
-      const postedWine = await response.json()
-      const newWines = [...wines, postedWine]
+      const newWine = await response.json()
+      const newWines = [...wines, newWine]
       setWineName("");
       setWineRating("");
       setWineNotes("");

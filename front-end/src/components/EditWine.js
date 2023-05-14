@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
-function EditWine ({ wines, setWines}) {
+function EditWine ({ wines, updateWines}) {
   
   const [target, setTarget] = useState();
   const [wineName, setWineName] = useState();
@@ -37,9 +37,10 @@ function EditWine ({ wines, setWines}) {
 
       const response = await fetch(`http://localhost:9292/wines/${target}`, configObj)
       const patchedWine = await response.json()
-      const unchangedWines = (wines.filter((wine) => wine.id !== patchedWine.id))
-      const newWines = [...unchangedWines, patchedWine]
-      setWines(newWines)
+      await updateWines(patchedWine)
+      // const unchangedWines = (wines.filter((wine) => wine.id !== patchedWine.id))
+      // const newWines = [...unchangedWines, patchedWine]
+      // setWines(newWines)
   }
 
  

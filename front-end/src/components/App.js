@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import '/Users/danielrice/Development/code/phase-3/phase-3-sinatra-react-project-dr/front-end/src/App.css';
-import { Route, Routes, Link, NavLink } from 'react-router-dom';
+import { Route, Routes, NavLink } from 'react-router-dom';
 import NewFood from './NewFood';
 import NewWine from './NewWine';
 import Home from './Home';
@@ -13,6 +13,33 @@ function App() {
   
   const [wines, setWines] = useState([]);
 
+  function updateWines (patchedWine) {
+    //update the wines in state after a fetch request to reflect changes
+    const updatedWinesArray = wines.map((wine) => {
+      console.log("wine:", wine, "patchedWine:", patchedWine)
+      if (wine.id === patchedWine.id) {
+        console.log(wine, "before")
+        wine = patchedWine
+        console.log(wine, "after")
+      }
+      return wine
+    })
+
+    setWines(updatedWinesArray)
+  }
+
+  function updateFoods (newFood, pairing) {
+    //update the foods in state after a fetch request to reflect changes
+    const newWinesArray = wines.map((wine) => {
+      const updatedFoods = wine.foods
+      if (wine.id == pairing) {
+        updatedFoods.push(newFood)
+        wine.foods = updatedFoods
+      }
+      return wine
+    })
+    setWines(newWinesArray)
+  }
 
   //fetches wines
   useEffect(() => {
@@ -25,13 +52,14 @@ function App() {
   return (
       <div className="App">
         
-        <NavLink to='/'>Home!</NavLink><NavLink to='/newwine'>New Wine!</NavLink><NavLink to='/newfood'>New Food!</NavLink><NavLink to='/editWine'>Edit!</NavLink>
+        <NavLink className='NavButton' to='/'>Home!</NavLink><NavLink className='NavButton' to='/newwine'>New Wine!</NavLink><NavLink className='NavButton' to='/newfood'>New Food!</NavLink><NavLink className='NavButton' to='/editWine'>Edit!</NavLink>
         
         <Routes>
           <Route path="/newfood" element= {
             <NewFood 
             wines={wines}
             setWines={setWines}
+            updateFoods={updateFoods}
             />
           }></Route>
   
@@ -46,6 +74,7 @@ function App() {
             <EditWine 
             wines={wines}
             setWines={setWines}
+            updateWines={updateWines}
             />
           }></Route>
   

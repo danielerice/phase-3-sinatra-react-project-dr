@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-function NewFood ({ user, setUser, wines, setWines}) {
+function NewFood ({ wines, updateFoods}) {
   
     const [foodName, setFoodName] = useState("");
     const [pairing, setPairing] = useState();
@@ -23,16 +23,7 @@ function NewFood ({ user, setUser, wines, setWines}) {
         
         const response = await fetch(`http://localhost:9292/foods`, configObj)
         const postedFood = await response.json()
-        const targetWine = (wines.find((wine) => wine.id == pairing))
-        
-        targetWine.foods.push(postedFood)
-        
-        const unchangedWines = wines.filter((wine) => targetWine.id !== wine.id)
-        
-        const stateWines = [...unchangedWines, targetWine]
-        
-
-        await setWines(stateWines)
+        await updateFoods(postedFood, pairing)
         await setFoodName('')
 
     }

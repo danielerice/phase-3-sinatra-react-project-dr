@@ -4,25 +4,6 @@ import Wine from "./Wine";
 
 function Home ({ wines, setWines }) {
 
-  console.log("home has fired", wines)
-
-  function renderWines() {
-      console.log("wines:", wines)
-      wines.map((wine) => {
-        return (<Wine
-          key={wine.id}
-          wineID={wine.id}
-          nameOfWine={wine.name}
-          rating={wine.rating}
-          notes={wine.notes}
-          userID={wine.user_id}
-        />)
-      }
-    )
-    }
-
-  
-  
   return (
         <div>
           

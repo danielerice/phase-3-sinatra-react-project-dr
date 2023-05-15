@@ -3,7 +3,7 @@ import Food from "./Food";
 import { Link } from "react-router-dom";
 
 
-function Wine ({ wineID, nameOfWine, rating, notes, userID, wines, setWines, wine }) {
+function Wine ({ wineID, nameOfWine, rating, notes, wines, setWines, wine }) {
   
 
   async function deleteWine (event) {

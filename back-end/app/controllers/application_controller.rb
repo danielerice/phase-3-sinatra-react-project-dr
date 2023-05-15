@@ -1,6 +1,7 @@
 class ApplicationController < Sinatra::Base
   set :default_content_type, 'application/json'
   
+  #takes in attribute hash as params and posts to foods table, returns created food obj
   post "/foods" do 
     wine = Wine.find(params[:wine_id])
     food = wine.foods.create(
@@ -37,6 +38,7 @@ class ApplicationController < Sinatra::Base
     wine.to_json(include: :foods)
   end
 
+  #gets all wine obj in the database and icludes foods
   get "/wines" do
     wines = Wine.all
     wines.to_json(include: :foods)

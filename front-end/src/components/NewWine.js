@@ -39,7 +39,7 @@ function NewWine ({ wines, setWines }) {
           <form onSubmit={postNewWine}>
               <label htmlFor="wineName" >Wine Name:</label><br />
               <input id="wineName" type="text" onChange={(e) => setWineName(e.target.value)} value={wineName}></input><br />
-              <lable htmlFor="wineRating" >Rating:</lable><br />
+              <label htmlFor="wineRating" >Rating:</label><br />
               <input id="wineRating" type="integer" onChange={(e) => setWineRating(e.target.value)} value={wineRating}></input><br />
               <label htmlFor="wineNotes" >Notes:</label><br />
               <textarea id="wineNotes" rows="4" columns="100" onChange={(e) => setWineNotes(e.target.value)} value={wineNotes}></textarea><br />

@@ -9,18 +9,17 @@ import EditWine from './EditWine';
 
 
 function App() {
-  console.log("app has rendered")
   
   const [wines, setWines] = useState([]);
 
   function updateWines (patchedWine) {
     //update the wines in state after a fetch request to reflect changes
     const updatedWinesArray = wines.map((wine) => {
-      console.log("wine:", wine, "patchedWine:", patchedWine)
+      
       if (wine.id === patchedWine.id) {
-        console.log(wine, "before")
+        
         wine = patchedWine
-        console.log(wine, "after")
+        
       }
       return wine
     })

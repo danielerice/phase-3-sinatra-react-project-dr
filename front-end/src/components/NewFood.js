@@ -33,15 +33,15 @@ function NewFood ({ wines, updateFoods}) {
     <div id="container">
         <div className="card">
             <form onSubmit={postNewFood}>
-                <label for="wineName" >Food Name:</label><br />
+                <label htmlFor="wineName" >Food Name:</label><br />
                 <input id="foodName" type="text" onChange={(e) => setFoodName(e.target.value)} value={foodName}></input><br />
                 <fieldset>
                     <legend>Pairs well with:</legend>
                         {wines.map((wine) => {
                             return (
-                                <div>
+                                <div key={wine.id}>
                                     <input type="radio" id={wine.id} name="wine.name" value={wine.name} onChange={(e) => setPairing(e.target.id)}></input>
-                                    <label for="wine.name">{wine.name}</label>
+                                    <label htmlFor="wine.name">{wine.name}</label>
                                 </div>
                             )
                         })}

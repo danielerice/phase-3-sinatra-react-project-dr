@@ -2,10 +2,10 @@ import React, { useState } from "react";
 
 function EditWine ({ wines, updateWines}) {
   
-  const [target, setTarget] = useState();
-  const [wineName, setWineName] = useState();
-  const [wineRating, setWineRating] = useState();
-  const [wineNotes, setWineNotes] = useState();
+  const [target, setTarget] = useState("");
+  const [wineName, setWineName] = useState("");
+  const [wineRating, setWineRating] = useState("");
+  const [wineNotes, setWineNotes] = useState("");
   
   function setTargetWine (targetId) {
     

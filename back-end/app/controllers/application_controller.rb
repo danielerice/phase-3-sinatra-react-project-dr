@@ -23,6 +23,7 @@ class ApplicationController < Sinatra::Base
   #takes the wine id and finds it, then destroys it. returns the wine obj that was deleted
   delete "/wines/:id" do
     wine = Wine.find_by(id: params[:id])
+    wine.foods.destroy_all
     Wine.destroy(params[:id])
     wine.to_json
   end
